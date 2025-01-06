@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  clickhouse:
+    build: .
+    container_name: clickhouse-server
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    restart: always
